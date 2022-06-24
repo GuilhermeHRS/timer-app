@@ -7,42 +7,67 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+
+    <script src="./js/app.js" defer></script>
+    <title>My Timer Project</title>
 </head>
 <body>
     <main>
-        <div class="intro py-3  text-center">
+        <div class="intro text-center">
             <div class="container">
-                <h2 class="text-primary display-3 my-4 ">TIMER</h2>
+                <h2 class="text display-3 my-4 ">TIMER</h2>
             </div>
         </div>
         
-        <div class="timer py-4 bg-primary">
+        <div class="timer-content py-4">
             <div class="container">
-                <h2 class="count my-5 p-xl-5 text-white text-center">00:00:00</h2>
-                <div class="content">
+                <h2 class="count my-5 p-xl-5 text-white text-center" id="timer">
+                    <span id="minutes">00</span> :
+                    <span id="seconds">00</span>
+                </h2>
+                <div class="content py-2">
                     <div class="icons row text-center">
                         <div class="col ">
-                            <i class="fa-solid fa-flag"></i>
+                            <button class="round"  id="flag">
+                                <i class="fa-solid fa-flag"></i>
+                            </button>  
                         </div>
                         <div class="col">
-                            <i class="fa-solid fa-play"></i>
+                            <button class="round" id="start">
+                                <i class="fa-solid fa-play" ></i>
+                            </button>  
                         </div>
                         <div class="col ">
-                            <i class="fa-solid fa-circle-pause"></i>
+                            <button class="round" id="pause">
+                                <i class="fa-solid fa-pause"></i>
+                            </button>  
                         </div>
-                        <div class="col d-none">
-                            <i class="fa-solid fa-circle-pause"></i>
+                        <div class="col">
+                            <button class="round" id="reset">
+                                <i class="fa-solid fa-stop" ></i>
+                            </button>  
                         </div>
                     </div>
 
                     <div class="result mt-5 py-3 bg-light">
                         <div class="leaderboard">
-                            <div class="history row text-center pt-3"> 
-                                <p class="col">[index]</p>
-                                <p class="col">+00:03:17</p>
-                                <p class="col">00:12:36</p>     
-                            </div>
+                            <table class="table mx-auto">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">INDEX</th>
+                                    <th scope="col">TIME</th>
+                                    <th scope="col">SUM</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row" value="0" id="flag-id">1</th>
+                                    <td class="col" id="flag-timer"></td>
+                                    <td class="col" id="flag-sum"></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            
                         </div>
                     </div>
                 </div>
