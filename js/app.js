@@ -1,17 +1,21 @@
 const time = document.getElementById('timer');
+const table = document.querySelector('#list');
+const td = document.querySelector('td');
+
+const appendMinutes = document.querySelector("#minutes");
+const appendSeconds = document.querySelector("#seconds");
+
+const btnPlay = document.getElementById("start");
+const btnPause = document.getElementById("pause");
+const btnFlag = document.getElementById("flag");
+const btnReset = document.getElementById("reset");
 
 var interval;
 var minutes = 00;
 var seconds = 00;
-var appendMinutes = document.querySelector("#minutes");
-var appendSeconds = document.querySelector("#seconds");
-var btnStart = document.getElementById("start");
-var btnPause = document.getElementById("pause");
-var btnFlag = document.getElementById("flag");
-var btnReset = document.getElementById("reset");
 
 
-btnStart.addEventListener('click', e => {
+btnPlay.addEventListener('click', e => {
     clearInterval(interval);
     interval = setInterval(startTimer, 10);
 });
@@ -19,6 +23,27 @@ btnStart.addEventListener('click', e => {
 btnPause.addEventListener('click', e => {
     clearInterval(interval);
     isPaused = true;
+});
+
+btnFlag.addEventListener('click', () => {
+
+    let historyFlagTimer = document.getElementById('flag-timer');
+    let historyID = document.getElementById('flag-id');
+    let historySum = document.getElementById('flag-sum');
+
+    let numberRows = table.rows.length;
+    let row = table.insertRow(numberRows);
+
+    historyID = row.insertCell(0);
+    historyID.textContent = numberRows;
+
+    historyFlagTimer = row.insertCell(1);
+    historyFlagTimer.textContent = minutes + ':' + seconds;
+
+    console.log(table.removeChild('tr'))
+
+    // historySum = row.insertCell(2);
+    // historySum.textContent = t + (minutes + ':' + seconds);
 });
 
 btnReset.addEventListener('click', e => {
@@ -29,7 +54,10 @@ btnReset.addEventListener('click', e => {
     appendMinutes.innerHTML = minutes;
     appendSeconds.innerHTML = seconds;
 
-    historyFlagTimer.textContent = "";
+    // Removendo todos os nós filhos de um elemento
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
 
 });
 
@@ -45,7 +73,6 @@ function startTimer() {
     }
 
     if (seconds > 99) {
-        console.log("seconds");
         minutes++;
         appendMinutes.innerHTML = "0" + minutes;
         seconds = 0;
@@ -56,18 +83,3 @@ function startTimer() {
         appendMinutes.innerHTML = minutes;
     }
 }
-
-
-btnFlag.addEventListener('click', () => {
-    let flagID = document.getElementById('flag-id')
-    let historyFlag = document.getElementById('flag-sum');
-    let historyFlagTimer = document.getElementById('flag-timer');
-    const rows = document.querySelectorAll('td');
-
-
-    historyFlagTimer.textContent = minutes + ':' + seconds;
-
-});
-
-
-
