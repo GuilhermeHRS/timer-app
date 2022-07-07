@@ -2,8 +2,8 @@ const time = document.getElementById('timer');
 const table = document.querySelector('#list');
 const td = document.querySelector('td');
 
-const appendMinutes = document.querySelector("#minutes");
-const appendSeconds = document.querySelector("#seconds");
+const appendSeconds = document.querySelector("#minutes");
+const appendMilliSeconds = document.querySelector("#seconds");
 
 const btnPlay = document.getElementById("start");
 const btnPause = document.getElementById("pause");
@@ -11,8 +11,8 @@ const btnFlag = document.getElementById("flag");
 const btnReset = document.getElementById("reset");
 
 var interval;
-var minutes = 00;
 var seconds = 00;
+var milliSecs = 00;
 
 
 btnPlay.addEventListener('click', e => {
@@ -38,48 +38,47 @@ btnFlag.addEventListener('click', () => {
     historyID.textContent = numberRows;
 
     historyFlagTimer = row.insertCell(1);
-    historyFlagTimer.textContent = minutes + ':' + seconds;
+    historyFlagTimer.textContent = seconds + ':' + milliSecs;
+
+    historySum = row.insertCell(2);
+    historySum.textContent = seconds - seconds + ':' + milliSecs - milliSecs;
 
     console.log(table.removeChild('tr'))
-
-    // historySum = row.insertCell(2);
-    // historySum.textContent = t + (minutes + ':' + seconds);
 });
 
 btnReset.addEventListener('click', e => {
     clearInterval(interval);
     seconds = "00";
-    minutes = "00";
+    milliSecs = "00";
 
-    appendMinutes.innerHTML = minutes;
     appendSeconds.innerHTML = seconds;
+    appendMilliSeconds.innerHTML = milliSecs;
 
-    // Removendo todos os nós filhos de um elemento
     while (table.firstChild) {
         table.removeChild(table.firstChild);
     }
 
 });
 
-function startTimer() {
-    seconds++;
+const startTimer = () => {
+    milliSecs++;
 
-    if (seconds <= 9) {
+    if (milliSecs <= 9) {
+        appendMilliSeconds.innerHTML = "0" + milliSecs;
+    }
+
+    if (milliSecs > 9) {
+        appendMilliSeconds.innerHTML = milliSecs;
+    }
+
+    if (milliSecs > 99) {
+        seconds++;
         appendSeconds.innerHTML = "0" + seconds;
+        milliSecs = 0;
+        appendMilliSeconds.innerHTML = "0" + 0;
     }
 
-    if (seconds > 9) {
+    if (milliSecs > 9) {
         appendSeconds.innerHTML = seconds;
-    }
-
-    if (seconds > 99) {
-        minutes++;
-        appendMinutes.innerHTML = "0" + minutes;
-        seconds = 0;
-        appendSeconds.innerHTML = "0" + 0;
-    }
-
-    if (seconds > 9) {
-        appendMinutes.innerHTML = minutes;
     }
 }
